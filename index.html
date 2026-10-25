@@ -308,7 +308,7 @@ footer{background:color-mix(in srgb,var(--surface) 62%,transparent);border:1px s
     if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){mn.textContent=fmt(MEMBERS)}
     else{var t0=null;(function step(ts){if(t0===null)t0=ts;var p=Math.min((ts-t0)/1200,1);mn.textContent=fmt(MEMBERS*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step)})(performance.now())}
   }
-  var BOTS=10; /* Hier die Anzahl der Bots eintragen */
+  var BOTS=4; /* Hier die Anzahl der Bots eintragen */
   var bn=$("bnum");
   if(BOTS>0){
     if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches){bn.textContent=BOTS}
