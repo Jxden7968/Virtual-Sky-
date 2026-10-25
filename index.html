@@ -119,6 +119,13 @@ section.join h2::after{margin-inline:auto;background:#fff}
 .rlist li{border-radius:14px}
 footer{max-width:900px;margin:0 auto;padding-top:24px;border-top:1px solid var(--line)}
 @media (prefers-reduced-motion:reduce){.ch,.game{transition:none}.ch:hover,.game:hover{transform:none}}
+.flink{font:inherit;color:var(--muted);background:none;border:0;padding:4px 8px;cursor:pointer;text-decoration:underline}
+.flink:hover{color:var(--ink)}
+.flink:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.legal h3{font-size:1.15rem;margin:28px 0 6px}
+.legal p,.legal li{color:var(--muted);max-width:68ch;margin:0 0 10px}
+.legal ul{padding-left:1.2em;margin:0 0 10px}
+.todo{background:#fff1a8;color:#4a3b00;padding:0 5px;border-radius:5px}
 </style>
 </head>
 <body>
@@ -184,6 +191,10 @@ footer{max-width:900px;margin:0 auto;padding-top:24px;border-top:1px solid var(-
       <input class="rin" id="rin" type="text" placeholder="Neue Regel eingeben" aria-label="Neue Regel">
       <button class="sm" id="radd">Hinzufügen</button>
     </div>
+    <div class="adder" id="lockbox">
+      <input class="rin" id="code" type="password" placeholder="Geheim-Code" autocomplete="off" aria-label="Geheim-Code">
+      <button class="sm" id="unlock">Entsperren</button>
+    </div>
     <div class="bar">
       <button class="sm" id="redit">Regeln bearbeiten</button>
       <button class="sm" id="rcopy">Für Discord kopieren</button>
@@ -191,8 +202,51 @@ footer{max-width:900px;margin:0 auto;padding-top:24px;border-top:1px solid var(-
     <p class="hint" id="rhint">Änderungen werden nur in deinem Browser gespeichert. Mit „Für Discord kopieren“ bekommst du den Text für deinen Regeln-Kanal.</p>
   </section>
 </div>
+<div id="tab-impressum" class="legal" hidden>
+  <section>
+    <h2>Impressum</h2>
+    <h3>Angaben gemäß § 5 DDG</h3>
+    <p><span class="todo">[Vor- und Nachname]</span><br><span class="todo">[Straße und Hausnummer]</span><br><span class="todo">[PLZ und Ort]</span></p>
+    <h3>Kontakt</h3>
+    <p>E-Mail: <a href="mailto:blackzockerbrot.business@gmail.com">blackzockerbrot.business@gmail.com</a></p>
+    <h3>Verantwortlich für den Inhalt</h3>
+    <p>Verantwortlich nach § 18 Abs. 2 MStV: <span class="todo">[Vor- und Nachname, Anschrift wie oben]</span></p>
+    <h3>Haftung für Inhalte</h3>
+    <p>Die Inhalte dieser Seite wurden mit Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität kann jedoch keine Gewähr übernommen werden.</p>
+    <h3>Haftung für Links</h3>
+    <p>Diese Seite verlinkt auf den Discord-Server „Virtual Sky“ und damit auf Angebote von Discord. Auf deren Inhalte und Datenverarbeitung haben wir keinen Einfluss. Virtual Sky ist eine Community auf Discord und steht in keiner offiziellen Verbindung zu Discord Inc., Roblox, Mojang/Microsoft oder Epic Games.</p>
+  </section>
+</div>
+<div id="tab-datenschutz" class="legal" hidden>
+  <section>
+    <h2>Datenschutzerklärung</h2>
+    <h3>Verantwortlicher</h3>
+    <p><span class="todo">[Vor- und Nachname, Anschrift wie im Impressum]</span><br>E-Mail: <a href="mailto:blackzockerbrot.business@gmail.com">blackzockerbrot.business@gmail.com</a></p>
+    <h3>Bereitstellung der Seite</h3>
+    <p>Diese Seite wird über die Plattform claude.ai von Anthropic bereitgestellt. Beim Aufruf können technisch notwendige Daten wie die IP-Adresse und Zeitpunkt des Zugriffs durch den Betreiber der Plattform verarbeitet werden. Wir selbst erheben keine weiteren Daten und führen keine Besucheranalyse durch.</p>
+    <h3>Schriftarten</h3>
+    <p>Zur Darstellung laden wir die Schriftarten „Bricolage Grotesque“ und „Instrument Sans“ von Google Fonts. Dabei wird deine IP-Adresse an Server von Google übertragen. Rechtsgrundlage ist unser berechtigtes Interesse an einer einheitlichen Darstellung (Art. 6 Abs. 1 lit. f DSGVO).</p>
+    <h3>Lokale Speicherung im Browser</h3>
+    <p>Die Seite speichert deine Einstellung für hellen oder dunklen Modus sowie von dir bearbeitete Regeln im lokalen Speicher deines Browsers. Diese Daten bleiben auf deinem Gerät und werden nicht an uns übertragen. Du kannst sie jederzeit in deinen Browser-Einstellungen löschen.</p>
+    <h3>Cookies und Tracking</h3>
+    <p>Wir setzen keine Cookies zu Werbe- oder Analysezwecken ein.</p>
+    <h3>Link zu Discord</h3>
+    <p>Wenn du auf „Server beitreten“ klickst, verlässt du diese Seite und wechselst zu Discord. Dort gilt die Datenschutzerklärung von Discord.</p>
+    <h3>Kontakt per E-Mail</h3>
+    <p>Wenn du uns schreibst, verarbeiten wir deine Nachricht und Absenderadresse, um sie zu beantworten (Art. 6 Abs. 1 lit. f DSGVO). Wir löschen sie, sobald sie nicht mehr gebraucht werden.</p>
+    <h3>Deine Rechte</h3>
+    <ul>
+      <li>Auskunft über deine gespeicherten Daten</li>
+      <li>Berichtigung und Löschung</li>
+      <li>Einschränkung der Verarbeitung</li>
+      <li>Widerspruch gegen die Verarbeitung</li>
+      <li>Beschwerde bei einer Datenschutz-Aufsichtsbehörde</li>
+    </ul>
+    <p>Schreib dafür einfach an die oben genannte E-Mail-Adresse.</p>
+  </section>
+</div>
 </main>
-<footer>Virtual Sky ist eine Discord-Community.</footer>
+<footer>Virtual Sky ist eine Discord-Community.<br><button class="flink" type="button" data-tab="impressum">Impressum</button><button class="flink" type="button" data-tab="datenschutz">Datenschutz</button></footer>
 <script>
 (function(){
   var DEF=["Sei respektvoll. Beleidigungen und Diskriminierung haben hier keinen Platz.","Kein Spam und keine unerlaubte Werbung.","Poste nur Inhalte, die für alle Altersgruppen passen.","Hör auf das Team, wenn es etwas sagt."];
@@ -213,23 +267,41 @@ footer{max-width:900px;margin:0 auto;padding-top:24px;border-top:1px solid var(-
     $("adder").className="adder"+(editing?" on":"");
     $("redit").textContent=editing?"Fertig":"Regeln bearbeiten";
   }
-  function add(){var v=$("rin").value.trim();if(!v)return;rules.push(v);$("rin").value="";save();render()}
+  function add(){if(!unlocked)return;var v=$("rin").value.trim();if(!v)return;rules.push(v);$("rin").value="";save();render()}
   $("radd").onclick=add;
   $("rin").onkeydown=function(e){if(e.key==="Enter")add()};
-  $("redit").onclick=function(){editing=!editing;render()};
+  var unlocked=false,HASH="f38389704f9947aabb6891abe07d4e4c85bbb685406ae36b00eeeff5f61050b7";
+  function sha(s){var e=new TextEncoder().encode("virtual-sky:"+s);return crypto.subtle.digest("SHA-256",e).then(function(b){return Array.prototype.map.call(new Uint8Array(b),function(x){return ("0"+x.toString(16)).slice(-2)}).join("")})}
+  function tryUnlock(){
+    var h=$("rhint"),v=$("code").value.trim();
+    if(!v)return;
+    if(!window.crypto||!crypto.subtle){h.textContent="Entsperren ist in diesem Browser nicht möglich.";return}
+    sha(v).then(function(x){
+      if(x===HASH){unlocked=true;editing=true;$("code").value="";$("lockbox").className="adder";h.textContent="Entsperrt. Du kannst die Regeln jetzt bearbeiten.";render()}
+      else{h.textContent="Falscher Code. Versuch es noch einmal."}
+    },function(){h.textContent="Prüfung fehlgeschlagen. Versuch es noch einmal."});
+  }
+  $("unlock").onclick=tryUnlock;
+  $("code").onkeydown=function(e){if(e.key==="Enter")tryUnlock()};
+  $("redit").onclick=function(){
+    if(editing){editing=false;render();return}
+    if(unlocked){editing=true;render();return}
+    $("lockbox").className="adder on";$("code").focus();
+  };
   $("rcopy").onclick=function(){
     var txt="# 📜 Regeln\n"+rules.map(function(r,i){return "**"+(i+1)+".** "+r}).join("\n");
     var h=$("rhint");
     try{navigator.clipboard.writeText(txt).then(function(){h.textContent="Kopiert. Füge den Text in deinen Regeln-Kanal ein."},function(){h.textContent="Kopieren nicht möglich. Markiere den Text bitte manuell."})}catch(e){h.textContent="Kopieren nicht möglich. Markiere den Text bitte manuell."}
   };
   function show(name){
-    ["start","regeln"].forEach(function(k){
+    ["start","regeln","impressum","datenschutz"].forEach(function(k){
       $("tab-"+k).hidden=(k!==name);
-      $("t-"+k).setAttribute("aria-selected",k===name?"true":"false");
+      if($("t-"+k))$("t-"+k).setAttribute("aria-selected",k===name?"true":"false");
     });
   }
   document.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){show(b.dataset.tab)}});
-  if(location.hash==="#regeln")show("regeln");
+  document.querySelectorAll(".flink").forEach(function(b){b.onclick=function(){show(b.dataset.tab);window.scrollTo(0,0)}});
+  var hh=location.hash.slice(1);if(["regeln","impressum","datenschutz"].indexOf(hh)>-1)show(hh);
   var root=document.documentElement,tg=$("tgl");
   function cur(){return root.getAttribute("data-theme")||(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}
   function label(){var d=cur()==="dark";tg.textContent=d?"☀️ Hell":"🌙 Dunkel";tg.setAttribute("aria-label",d?"Zum hellen Modus wechseln":"Zum dunklen Modus wechseln")}
