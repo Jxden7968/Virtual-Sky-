@@ -136,9 +136,26 @@ body::before{display:none}
 .member h3{font-size:1.2rem}
 .role{display:inline-block;margin:8px 0 10px;padding:3px 14px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:.85rem;color:var(--accent)}
 .member p{margin:0;color:var(--muted);font-size:.95rem}
+body{background:none}
+#skybg{position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,#3b2a7a,#ffb067);overflow:hidden}
+#stars{position:absolute;inset:0;opacity:0;background-image:radial-gradient(1.5px 1.5px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 25% 40%,#fff,transparent),radial-gradient(2px 2px at 40% 12%,#fff,transparent),radial-gradient(1px 1px at 55% 30%,#fff,transparent),radial-gradient(1.5px 1.5px at 70% 18%,#fff,transparent),radial-gradient(1px 1px at 85% 45%,#fff,transparent),radial-gradient(1.5px 1.5px at 92% 8%,#fff,transparent),radial-gradient(1px 1px at 15% 65%,#fff,transparent),radial-gradient(1px 1px at 62% 72%,#fff,transparent),radial-gradient(1.5px 1.5px at 33% 85%,#fff,transparent),radial-gradient(1px 1px at 5% 90%,#fff,transparent),radial-gradient(1px 1px at 78% 88%,#fff,transparent),radial-gradient(1.5px 1.5px at 48% 55%,#fff,transparent),radial-gradient(1px 1px at 95% 62%,#fff,transparent)}
+.cl{position:absolute;height:46px;border-radius:46px;background:rgba(255,255,255,.55);will-change:transform}
+.cl::before{content:"";position:absolute;left:18%;bottom:55%;width:45%;height:150%;border-radius:50%;background:inherit}
+#alt{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:15;background:rgba(10,20,50,.6);color:#fff;border:1px solid rgba(255,255,255,.25);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-radius:14px;padding:8px 14px;font-size:.9rem;line-height:1.35;text-align:right}
+#alt span{color:#cfe0ff}
+#tab-start section:not(.join),#tab-regeln section,#tab-team section{background:rgba(255,255,255,.6);background:color-mix(in srgb,var(--surface) 62%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:24px;padding:30px 28px;margin:22px 0}
+footer{background:color-mix(in srgb,var(--surface) 62%,transparent);border:1px solid var(--line);border-radius:16px;padding:16px;margin:24px auto 0;max-width:900px}
 </style>
 </head>
 <body>
+<div id="skybg" aria-hidden="true">
+  <div id="stars"></div>
+  <div class="cl" style="left:6%;top:70vh;width:220px" data-k="1.1"></div>
+  <div class="cl" style="left:62%;top:55vh;width:300px" data-k="0.7"></div>
+  <div class="cl" style="left:30%;top:95vh;width:260px" data-k="1.4"></div>
+  <div class="cl" style="left:78%;top:105vh;width:200px" data-k="0.9"></div>
+</div>
+<div id="alt" role="status"><b id="altz">Sonnenuntergang</b><br><span id="altv">0 m</span></div>
 <nav class="tabs" role="tablist">
   <button class="tab" role="tab" id="t-start" aria-selected="true" data-tab="start">Start</button>
   <button class="tab" role="tab" id="t-regeln" aria-selected="false" data-tab="regeln">Regeln</button>
@@ -298,6 +315,36 @@ body::before{display:none}
     else{var b0=null;(function bstep(ts){if(b0===null)b0=ts;var p=Math.min((ts-b0)/1200,1);bn.textContent=Math.round(BOTS*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(bstep)})(performance.now())}
   }
   render();
+})();
+</script>
+<script>
+(function(){
+  var S=[[0,"#3b2a7a","#ffb067"],[.25,"#5b8def","#f7c6a0"],[.5,"#1f56c4","#8fc3f5"],[.75,"#0a1a45","#2a4fb0"],[1,"#02030c","#0b1230"]];
+  function rgb(x){return [1,3,5].map(function(i){return parseInt(x.substr(i,2),16)})}
+  S.forEach(function(s){s[1]=rgb(s[1]);s[2]=rgb(s[2])});
+  function mix(a,b,t){return "rgb("+a.map(function(v,i){return Math.round(v+(b[i]-v)*t)}).join(",")+")"}
+  var $=function(i){return document.getElementById(i)},bg=$("skybg"),st=$("stars"),zn=$("altz"),av=$("altv");
+  var cls=[].slice.call(document.querySelectorAll(".cl")),busy=false;
+  var calm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function update(){
+    busy=false;
+    var d=document.documentElement,max=Math.max(1,d.scrollHeight-window.innerHeight);
+    var p=Math.min(1,Math.max(0,(window.pageYOffset||d.scrollTop||0)/max));
+    var i=0;while(i<3&&p>S[i+1][0])i++;
+    var t=(p-S[i][0])/(S[i+1][0]-S[i][0]);
+    bg.style.background="linear-gradient(180deg,"+mix(S[i][1],S[i+1][1],t)+","+mix(S[i][2],S[i+1][2],t)+")";
+    st.style.opacity=Math.min(1,Math.max(0,(p-.45)/.35));
+    var co=Math.max(0,1-Math.max(0,(p-.4)/.25));
+    cls.forEach(function(c){c.style.opacity=co;c.style.transform=calm?"none":"translateY("+(-p*90*c.dataset.k)+"vh)"});
+    zn.textContent=p<.2?"Sonnenuntergang":p<.45?"Wolken":p<.7?"Stratosphäre":"Weltraum";
+    var a=Math.round(p*100000);
+    av.textContent="Höhe: "+(a<1000?a+" m":(a/1000).toFixed(1).replace(".",",")+" km");
+  }
+  function req(){if(!busy){busy=true;requestAnimationFrame(update)}}
+  window.addEventListener("scroll",req,{passive:true});
+  window.addEventListener("resize",req);
+  document.addEventListener("click",function(){setTimeout(update,60)});
+  update();
 })();
 </script>
 </body>
