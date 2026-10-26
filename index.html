@@ -146,6 +146,7 @@ body{background:none}
 #tab-start section:not(.join),#tab-regeln section,#tab-team section{background:rgba(255,255,255,.6);background:color-mix(in srgb,var(--surface) 62%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:24px;padding:30px 28px;margin:22px 0}
 footer{background:color-mix(in srgb,var(--surface) 62%,transparent);border:1px solid var(--line);border-radius:16px;padding:16px;margin:24px auto 0;max-width:900px}
 .av{width:92px;height:92px}
+.stat[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -176,6 +177,7 @@ footer{background:color-mix(in srgb,var(--surface) 62%,transparent);border:1px s
   <div class="stats">
     <div class="stat"><i class="dot" aria-hidden="true"></i><b id="mnum">—</b><span>Mitglieder auf Virtual Sky</span></div>
     <div class="stat bot"><i class="dot" aria-hidden="true"></i><b id="bnum">—</b><span>Bots im Server</span></div>
+    <div class="stat" id="ostat"><i class="dot" aria-hidden="true"></i><b id="onum">—</b><span>Gerade online</span></div>
   </div>
   <section>
     <h2>Worum es geht</h2>
@@ -366,6 +368,8 @@ fetch("stats.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():nul
     var m=document.getElementById("mnum"),b=document.getElementById("bnum");
     if(m&&j.members>=0)m.textContent=Number(j.members).toLocaleString("de-DE");
     if(b&&j.bots>=0)b.textContent=Number(j.bots).toLocaleString("de-DE");
+    var o=document.getElementById("onum"),os=document.getElementById("ostat");
+    if(o&&os&&j.online>=0){o.textContent=Number(j.online).toLocaleString("de-DE");os.hidden=false}
   },1400);
 }).catch(function(){});
 </script>
