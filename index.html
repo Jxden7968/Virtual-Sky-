@@ -347,5 +347,15 @@ footer{background:color-mix(in srgb,var(--surface) 62%,transparent);border:1px s
   update();
 })();
 </script>
+<script>
+fetch("stats.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(j){
+  if(!j)return;
+  setTimeout(function(){
+    var m=document.getElementById("mnum"),b=document.getElementById("bnum");
+    if(m&&j.members>=0)m.textContent=Number(j.members).toLocaleString("de-DE");
+    if(b&&j.bots>=0)b.textContent=Number(j.bots).toLocaleString("de-DE");
+  },1400);
+}).catch(function(){});
+</script>
 </body>
 </html>
