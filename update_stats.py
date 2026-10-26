@@ -30,14 +30,32 @@ while True:
 
 data = {"members": members, "bots": bots}
 
-# Online-Zahl aus dem Einladungslink (ungefaehr, kein Extra-Recht noetig)
-try:
-    inv = get(f"https://discord.com/api/v10/invites/{INVITE}?with_counts=true")
-    online = inv.get("approximate_presence_count")
-    if online is not None:
-        data["online"] = online
-except Exception as e:
-    print("Online-Zahl nicht geladen:", e)
+# Online-Zahl holen (oeffentlich, ohne Bot-Token)
+def get_public(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (virtual-sky-stats)"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        return json.load(r)
+
+online = None
+quellen = [
+    ("Einladung", f"https://discord.com/api/v10/invites/{INVITE}?with_counts=true", "approximate_presence_count"),
+    ("Widget", f"https://discord.com/api/guilds/{GUILD}/widget.json", "presence_count"),
+]
+for name, url, key in quellen:
+    try:
+        d = get_public(url)
+        v = d.get(key)
+        print("Online via", name, "->", v)
+        if v is not None:
+            online = v
+            break
+    except Exception as e:
+        print("Online via", name, "fehlgeschlagen:", e)
+
+if online is not None:
+    data["online"] = online
+else:
+    print("Keine Online-Zahl gefunden")
 
 with open("stats.json", "w") as f:
     json.dump(data, f)
