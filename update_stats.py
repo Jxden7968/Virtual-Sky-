@@ -2,7 +2,7 @@ import json, os, urllib.request
 
 TOKEN = os.environ["DISCORD_TOKEN"]
 GUILD = os.environ["GUILD_ID"]
-INVITE = os.environ.get("INVITE_CODE", "qt9qMv7")
+INVITE = os.environ.get("INVITE_CODE", "DUebsA85n2")
 HEADERS = {
     "Authorization": "Bot " + TOKEN,
     "User-Agent": "DiscordBot (virtual-sky-stats, 1.0)",
