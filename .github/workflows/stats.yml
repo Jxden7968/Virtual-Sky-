@@ -2,7 +2,7 @@ name: Update Discord stats
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Pakete installieren
+        run: pip install websockets
       - name: Zahlen von Discord holen
         run: python update_stats.py
         env:
