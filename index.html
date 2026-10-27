@@ -147,6 +147,8 @@ body{background:none}
 footer{background:color-mix(in srgb,var(--surface) 62%,transparent);border:1px solid var(--line);border-radius:16px;padding:16px;margin:24px auto 0;max-width:900px}
 .av{width:92px;height:92px}
 .stat[hidden]{display:none}
+.next{display:inline-flex;gap:8px;align-items:center;margin:6px 0 0;padding:7px 16px;border-radius:999px;background:rgba(255,255,255,.6);background:color-mix(in srgb,var(--surface) 62%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--line);font-size:.9rem;color:var(--ink)}
+.next[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -179,6 +181,7 @@ footer{background:color-mix(in srgb,var(--surface) 62%,transparent);border:1px s
     <div class="stat bot"><i class="dot" aria-hidden="true"></i><b id="bnum">—</b><span>Bots im Server</span></div>
     <div class="stat" id="ostat"><i class="dot" aria-hidden="true"></i><b id="onum">—</b><span>Gerade online</span></div>
   </div>
+  <p class="next" id="nextup" hidden></p>
   <section>
     <h2>Worum es geht</h2>
     <p class="intro">Virtual Sky ist eine freundliche Community für Leute, die Spaß an Spielen, guter Musik und netten Gesprächen haben. Hier findest du Mitspieler, Austausch und Gesellschaft, egal ob du neu bist oder schon lange dabei.</p>
@@ -364,6 +367,15 @@ footer{background:color-mix(in srgb,var(--surface) 62%,transparent);border:1px s
 <script>
 fetch("stats.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(j){
   if(!j)return;
+  var INTERVAL=10; /* Minuten, wie in stats.yml eingestellt */
+  var np=document.getElementById("nextup");
+  function tick(){
+    var n=new Date(),nx=new Date(n);
+    nx.setMinutes(n.getMinutes()+INTERVAL-(n.getMinutes()%INTERVAL),0,0);
+    var mins=Math.max(1,Math.ceil((nx-n)/60000));
+    np.textContent="🔄 Nächste Aktualisierung ca. "+nx.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit"})+" Uhr (in "+mins+" Min.)";
+  }
+  if(np){np.hidden=false;tick();setInterval(tick,20000)}
   setTimeout(function(){
     var m=document.getElementById("mnum"),b=document.getElementById("bnum");
     if(m&&j.members>=0)m.textContent=Number(j.members).toLocaleString("de-DE");
