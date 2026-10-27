@@ -102,6 +102,24 @@ footer{text-align:center;color:var(--muted);font-size:.9rem;padding:0 20px 32px}
 .stat b{font:800 clamp(2rem,7vw,3rem)/1 "Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.02em}
 .stat span{color:var(--muted)}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:8px 0}
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--accent);
+  border-radius: 16px; /* Etwas runder */
+  padding: 22px 26px; /* Etwas mehr Platz */
+  margin: 8px 0 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04); /* Leichter Schatten */
+  transition: transform 0.2s; /* Für Hover-Effekt */
+}
+
+.stat:hover {
+  transform: translateY(-2px); /* Hebt sich leicht beim Darüberfahren */
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
 .stats .stat{margin:0}
 .stat.bot{border-left-color:var(--blurple)}
 .stat.bot .dot{background:var(--blurple);box-shadow:0 0 0 5px rgba(88,101,242,.2)}
