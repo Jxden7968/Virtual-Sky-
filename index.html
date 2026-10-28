@@ -149,6 +149,34 @@ footer{background:color-mix(in srgb,var(--surface) 62%,transparent);border:1px s
 .stat[hidden]{display:none}
 .next{display:flex;width:fit-content;max-width:100%;text-align:center;justify-content:center;gap:8px;align-items:center;margin:12px auto 0;padding:7px 16px;border-radius:999px;background:rgba(255,255,255,.6);background:color-mix(in srgb,var(--surface) 62%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--line);font-size:.9rem;color:var(--ink)}
 .next[hidden]{display:none}
+::selection{background:var(--accent);color:#fff}
+html{scrollbar-width:thin}
+main h2{font-size:clamp(1.9rem,5vw,2.8rem)}
+.intro{font-size:1.05rem;line-height:1.65}
+#tab-start,#tab-regeln,#tab-team,#tab-bots{animation:rise .45s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (min-width:701px){.tabs::before{content:"☁️ Virtual Sky";font:800 1.15rem "Bricolage Grotesque",system-ui,sans-serif;margin-right:14px;align-self:center;color:var(--ink)}}
+.tab{transition:background .2s,color .2s}
+.tab:hover{color:var(--ink)}
+.btn:not(.alt){background:linear-gradient(135deg,#5865f2,#8a3f9e);box-shadow:0 6px 18px rgba(88,101,242,.35);transition:transform .2s,box-shadow .2s}
+.btn:not(.alt):hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(88,101,242,.45);filter:none}
+#tab-start section:not(.join),#tab-regeln section,#tab-team section,#tab-bots section{box-shadow:0 10px 30px rgba(20,10,60,.18)}
+.stat{transition:transform .2s,box-shadow .2s}
+.stat:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(20,10,60,.25)}
+.stat b{background:linear-gradient(135deg,var(--ink),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ch,.game,.member{position:relative;overflow:hidden}
+.ch::after,.game::after,.member::after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#7a3b8f,#e5667a,#ffb067)}
+.ch::before{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:1.5rem;background:var(--bg);border:1px solid var(--line);margin-bottom:12px}
+.member{transition:transform .2s,box-shadow .2s}
+.member:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(60,30,100,.16)}
+.rlist .n{background:var(--bg);border:1px solid var(--line);border-radius:50%;width:2em;height:2em;min-width:2em;display:grid;place-items:center;font-size:.9rem}
+section.join{position:relative;overflow:hidden}
+section.join::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.7;background-image:radial-gradient(1.5px 1.5px at 12% 22%,#fff,transparent),radial-gradient(1px 1px at 30% 70%,#fff,transparent),radial-gradient(2px 2px at 55% 18%,#fff,transparent),radial-gradient(1px 1px at 78% 62%,#fff,transparent),radial-gradient(1.5px 1.5px at 90% 25%,#fff,transparent),radial-gradient(1px 1px at 6% 80%,#fff,transparent)}
+section.join>*{position:relative}
+section.join h2{font-size:clamp(2rem,6vw,3.2rem)}
+section.join .btn{background:#fff;color:#2a1b5e;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+footer{text-align:center;font-size:.9rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){#tab-start,#tab-regeln,#tab-team,#tab-bots{animation:none}.btn,.stat,.member{transition:none}}
 </style>
 </head>
 <body>
